@@ -1,85 +1,46 @@
-# GeoSapiens: Desafio técnico para Front End do Coletum
+# Getting Started with Create React App
 
-Este é um desafio que iremos utilizar para avaliar os conhecimentos técnicos do(a)s candidato(a)s interessado(a)s na vaga de Front End disponível na GeoSapiens.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-# Contextualização
+## Available Scripts
 
-O Coletum é um sistema propriétario da GeoSapiens (https://coletum.com) oferecido em formato SaaS. Ele é uma plataforma para coleta e gestão de dados voltada principalmente a empresas que frequentemente coletam dados em ambientes fora do escritório ou em campo.
+In the project directory, you can run:
 
-O processo de uso do Coletum se inicia no sistema web, onde os usuários configuram a estrutura dos formulários através de uma interface web (de forma bastante similar ao Google Forms). Após os formulários serem construídos / estruturados, os usuários podem preenchê-los através de uma interface web ou de um aplicativo para dispositivo móvel.
+### `yarn start`
 
-O Coletum dispõe de um webservice (graphql) para consumo dos preenchimentos, dos formulários e das estrutura dos formulários.
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-Documentação do webservice: https://coletum.docs.apiary.io
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
-# O Desafio
+### `yarn test`
 
-O desafio consiste na criação de duas interfaces web utilizando React para ações distintas do usuário envolvendo o webservice do Coletum. 
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-1. Uma tela de cadastro de um formulário específico; e
+### `yarn build`
 
-1. Uma tela de apresentação dos preenchimentos existentes para um formulário específico.
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-## Instruções
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-1. Crie um `fork` deste projeto para desenvolver o seu desafio.
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-1. Use o `README` principal do respositório para nos contar um pouco sobre como foi desenvolver a solução do desafio, decisões tomadas e principalmente as instruções de como rodar o seu projeto. Essa parte é muito importante, já quem quem irá rodar o seu projeto não é uma pessoa especialista em frontend, e se conseguir explicar pra ela as etapas do processo é um bom começo.
+### `yarn eject`
 
-1. Ao finalizar o desafio, envie um e-mail para <vemprageo@geosapiens.com.br> com o título do e-mail `Desafio Coletum front-end - seu nome`, e contendo o link para o seu `fork` no corpo do e-mail.
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-1. Esse é um desafio técnico e não existe apenas uma resposta correta. Mostre a sua técnica de solução de problemas e criatividade, independente do seu nível de experiência, mas não esqueça do objetivo do desafio.
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-## Desafio #1 Tela de cadastro de preenchimento
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-Acessar a estrutura do formulário indicado através do __webservice__ do Coletum, e com base na estrutura apresentada, criar uma interface web em React para a criação de preenchimentos deste formulário.
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-Lembrando que a tela deve ter um botão de ação `mockup` para enviar o formulário preenchido que apresente a forma de envio dos dados.
+## Learn More
 
-O formulário já foi criado no Coletum e é chamado "Filmes Preferidos", sendo um cadastro simples dos seus filmes preferidos.
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-A estrutura do formulário está disponível na URL:
-<https://coletum.com/api/graphql?query={form_structure(formId:23458){label,componentId,type,helpBlock,order,options,minimum,maximum,widget,components{label,componentId,type,options,minimum,maximum,widget,components{label,componentId,type,options,minimum,maximum,widget,components{label,componentId,type,options,minimum,maximum,widget,components{label,type,options,minimum,maximum,widget}}}}}}&token=7s5txcu909kwc48wookgw8g00occokk>
-
-Este formulário possui os seguintes campos:
-- Nome do filme: campo textual;
-- Categorias: campo de múltipla escolha;
-- Avaliação pessoal: campo “estrela” (0 a 5 estrelas);
-- Data de lançamento: campo de data; e
-- URL para o site do IMDB com informações sobre o filme: campo URL.
-
-Lembre-se de criar uma interface para preenchimento ***dinâmica***, ou seja, ela deve se adaptar a estrutura do formulário recebida pelo webservice e não ser fixa com as questões deste formulário de teste. Não se preocupe com outros tipos de campos, contemple apenas “textual”, “seleção múltipla”, “data”, “estrela” e “URL”.
-
-## Desafio #2 Tela de listagem de preenchimentos
-
-Acessar a listagem de preenchimentos existentes para o formulário "Filmes Preferidos", através da rota do __webservice__, e criar uma interface web em React para a apresentação da listagem dos preenchimentos existentes e um botão de ação para a visualização completa do preenchimento em questão.
-
-A listagem de preenchimentos do formulário está disponível na URL:
-<https://coletum.com/api/graphql?query={answer(formId:23458){answer{nomeDoFilme302645,categorias302641,avaliacaoPessoal302642,dataDeLancamento302643,urlParaOSiteDoDoImdbComInformacoesSobreOFilme302644},metaData{userId,userName,createdAtSource,friendlyId,createdAt,createdAtDevice,createdAtCoordinates,updatedAt,updatedAtCoordinates}}}&token=7s5txcu909kwc48wookgw8g00occokk>
-
-## O que avaliaremos no seu desafio
-
-1. Contexto geral do resultado final de acordo com o nível de experiência;
-
-1. Histórico de commits do git;
-
-1. As instruções para rodar o projeto;
-
-1. Organização, semântica, estrutura, legibilidade, manutenibilidade do seu código;
-
-1. A implementação da forma de consumo dos dados através do webservice do Coletum;
-
-1. O controle do estado da aplicação (com redux ou mobx);
-
-1. Alcance dos objetivos;
-
-1. Componentização dos componentes; e
-
-1. Responsividade do layout.
-
-## Diferenciais opcionais do desafio
-
-1. Testes unitários; e
-
-1. Dockerização da aplicação.
-
+To learn React, check out the [React documentation](https://reactjs.org/).
