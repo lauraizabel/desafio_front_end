@@ -1,29 +1,63 @@
 import React, { useState, useEffect } from 'react';
-import { FormStructure } from '../../@types';
-import { fetchFormDetails } from '../../api/fill-form/FillForm';
-// import { mockForm } from '../../api/mock';
-import { Container } from './styles';
+import { useQuery } from '@apollo/client';
+import { Button } from '@material-ui/core';
+import { FormStructureFormatted } from '../../@types/FormField';
+import { Container, ContainerRegister, ContainerButton } from './styles';
+import { LOAD_FORM } from '../../api/queries';
+import { useBlockLoadingContext } from '../../contexts/BlockLoaderContext';
+import Input from '../../components/Input';
+import { formatStructure } from '../../helpers/formatStructure';
+import Select from '../../components/Select';
+
+const formFieldsComponents = {
+  textfield: Input,
+  checkboxfield: Select,
+  urlfield: Input,
+  datefield: Input,
+  ratingfield: Input,
+};
 
 const RegistrationFilling: React.FC = () => {
-  const [form, setForm] = useState<FormStructure[]>();
+  const { setIsLoading } = useBlockLoadingContext();
 
-  const fetchFormStructure = async () => {
-    try {
-      const { data } = await fetchFormDetails();
-      const { form_structure: formStructure } = data.data;
-      setForm(formStructure);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  console.log(form);
+  const [formFields, setFormFields] = useState<FormStructureFormatted[]>([]);
+
+  const { data, loading } = useQuery(LOAD_FORM);
+
   useEffect(() => {
-    fetchFormStructure();
-  }, []);
+    setIsLoading(loading);
+    if (data) {
+      const { form_structure: formStructure_ } = data;
+      const formattedStructureArray = formatStructure(formStructure_);
+      setFormFields(formattedStructureArray);
+    }
+  }, [loading, data]);
+
+  console.log(formFields);
 
   return (
     <Container>
-      <h1>oi pessoal</h1>
+      {formFields?.map((field) => {
+        const RenderField = formFieldsComponents[field.type];
+        return (
+          <ContainerRegister>
+            <RenderField
+              placeholder={field.label}
+              required={field.required}
+              type={field.type}
+              label={field.label}
+              options={field.options ?? []}
+              isMultiSelect={field.multiple}
+              helperText={field.helperLabel}
+            />
+          </ContainerRegister>
+        );
+      })}
+      <ContainerButton>
+        <Button variant="contained" color="primary">
+          SALVAR RESPOSTAS
+        </Button>
+      </ContainerButton>
     </Container>
   );
 };
