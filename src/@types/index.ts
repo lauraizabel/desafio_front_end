@@ -1,4 +1,4 @@
-export interface ComponentStructure {
+export interface FormFieldStructure {
   label: string | null;
   componentId: string | null;
   type: string | null;
@@ -13,6 +13,6 @@ export interface ComponentStructure {
   widget: string | null;
 }
 
-export interface FormStructure extends ComponentStructure {
-  components: ComponentStructure | null;
+export interface FormStructure extends FormFieldStructure {
+  components: FormFieldStructure[] | FormFieldStructure | null;
 }
