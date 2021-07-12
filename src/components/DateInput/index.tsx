@@ -8,7 +8,7 @@ import {
 import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
 
 import { Container } from './styles';
-import { IFieldProps } from '../../@types/Components';
+import { IFieldProps } from '../../@types/components';
 
 const DateInput: React.FC<IFieldProps> = ({
   required,

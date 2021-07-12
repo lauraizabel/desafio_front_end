@@ -18,3 +18,5 @@ export const ContainerButton = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+export const ContainerForm = styled.form``;

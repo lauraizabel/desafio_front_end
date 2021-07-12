@@ -8,7 +8,7 @@ import {
   FormControl,
 } from '@material-ui/core';
 import { Container } from './styles';
-import { IFieldProps } from '../../@types/Components';
+import { IFieldProps } from '../../@types/components';
 
 const Select: React.FC<IFieldProps> = ({
   placeholder,

@@ -5,6 +5,7 @@ import GlobalStyle from './styles/global';
 import HttpClient from './api/httpClient';
 
 import BlockLoadingProvider from './contexts/BlockLoaderContext';
+import ListFill from './pages/ListFill';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <GlobalStyle />
       <BlockLoadingProvider>
         <RegistrationFilling />
+        <ListFill />
       </BlockLoadingProvider>
     </ApolloProvider>
   );

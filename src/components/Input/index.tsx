@@ -2,7 +2,7 @@ import React from 'react';
 import { TextField, MenuItem } from '@material-ui/core';
 
 import { Container } from './styles';
-import { IFieldProps } from '../../@types/Components';
+import { IFieldProps } from '../../@types/components';
 
 const Input: React.FC<IFieldProps> = ({
   required,

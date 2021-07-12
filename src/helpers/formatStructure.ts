@@ -1,4 +1,4 @@
-import { FormStructureAPI, FormStructureFormatted } from '../@types/FormField';
+import { FormStructureAPI, FormStructureFormatted } from '../@types/formField';
 
 const FieldsStructure = {
   id: '',
@@ -17,6 +17,7 @@ export const formatStructure = (form: FormStructureAPI[]) => {
       const fieldsFormatted: FormStructureFormatted = {
         ...FieldsStructure,
         type: 'textfield',
+        error: '',
       };
 
       fieldsFormatted.id = structure.componentId;

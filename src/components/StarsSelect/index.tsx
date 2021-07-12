@@ -1,7 +1,7 @@
 import React from 'react';
 import { Rating } from '@material-ui/lab';
 import { InputLabel, FormHelperText, FormControl } from '@material-ui/core';
-import { IFieldProps } from '../../@types/Components';
+import { IFieldProps } from '../../@types/components';
 
 import { Container } from './styles';
 

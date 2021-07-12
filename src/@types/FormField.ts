@@ -37,4 +37,5 @@ export interface FormStructureFormatted {
   helperLabel: string;
   multiple: boolean;
   widget?: string;
+  error: string;
 }
