@@ -1,3 +1,4 @@
+// es
 import React from 'react';
 import {
   Select as SelectUI,
@@ -17,8 +18,19 @@ const Select: React.FC<IFieldProps> = ({
   value,
   isMultiSelect,
   helperText,
-}: IFieldProps) => (
-  <>
+  name,
+  onChange,
+}: IFieldProps) => {
+  const handleChange = (
+    event: React.ChangeEvent<{
+      name?: string | undefined;
+      value: any;
+    }>,
+  ) => {
+    onChange(event.target.name ?? '', event.target.value);
+  };
+
+  return (
     <Container>
       <FormControl>
         <InputLabel>{label}</InputLabel>
@@ -27,10 +39,11 @@ const Select: React.FC<IFieldProps> = ({
           label={label}
           variant="outlined"
           placeholder={placeholder}
-          onChange={(e) => console.log(e.target.value)}
+          onChange={handleChange}
           multiple={isMultiSelect}
           autoWidth={true}
           value={[]}
+          name={name}
         >
           {options?.map((val) => (
             <MenuItem value={val}>{val}</MenuItem>
@@ -39,7 +52,7 @@ const Select: React.FC<IFieldProps> = ({
         <FormHelperText>{helperText}</FormHelperText>
       </FormControl>
     </Container>
-  </>
-);
+  );
+};
 
 export default Select;

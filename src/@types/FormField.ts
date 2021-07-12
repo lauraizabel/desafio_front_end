@@ -38,6 +38,3 @@ export interface FormStructureFormatted {
   multiple: boolean;
   widget?: string;
 }
-export interface FormValues {
-  [k: string]: string;
-}

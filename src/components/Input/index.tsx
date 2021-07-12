@@ -10,20 +10,28 @@ const Input: React.FC<IFieldProps> = ({
   helperText,
   label,
   value,
-  options,
   placeholder,
-}: IFieldProps) => (
-  <Container>
-    <TextField
-      required={required}
-      type={type}
-      helperText={helperText}
-      label={label}
-      variant="outlined"
-      placeholder={placeholder}
-      onChange={(e) => console.log(e.target.value)}
-    />
-  </Container>
-);
-
+  onChange,
+  name,
+}: IFieldProps) => {
+  const onChangeValues = (
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
+  ) => {
+    onChange(event.target.name, event.target.value);
+  };
+  return (
+    <Container>
+      <TextField
+        name={name}
+        required={required}
+        type={type}
+        helperText={helperText}
+        label={label}
+        variant="outlined"
+        placeholder={placeholder}
+        onChange={onChangeValues}
+      />
+    </Container>
+  );
+};
 export default Input;

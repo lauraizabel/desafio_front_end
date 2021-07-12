@@ -6,19 +6,29 @@ import { IFieldProps } from '../../@types/Components';
 import { Container } from './styles';
 
 const StarsSelect: React.FC<IFieldProps> = ({
-  placeholder,
+  name,
   required,
   helperText,
   label,
   value,
-}: IFieldProps) => (
-  <Container>
-    <FormControl>
-      {/* <InputLabel>{label}</InputLabel> */}
-      <Rating title={label} />
-      <FormHelperText>{helperText}</FormHelperText>
-    </FormControl>
-  </Container>
-);
+  onChange,
+}: IFieldProps) => {
+  const handleChange = (values: number | null) => {
+    onChange(name, values?.toString());
+  };
+
+  return (
+    <Container>
+      <FormControl required={required}>
+        <Rating
+          title={label}
+          name={name}
+          onChange={(event, val) => handleChange(val)}
+        />
+        <FormHelperText>{helperText}</FormHelperText>
+      </FormControl>
+    </Container>
+  );
+};
 
 export default StarsSelect;

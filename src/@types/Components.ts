@@ -7,4 +7,6 @@ export interface IFieldProps {
   options?: string[];
   placeholder: string;
   isMultiSelect?: boolean;
+  onChange: (name: string, value: any) => void;
+  name: string;
 }

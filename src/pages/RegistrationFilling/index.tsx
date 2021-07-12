@@ -9,18 +9,21 @@ import Input from '../../components/Input';
 import { formatStructure } from '../../helpers/formatStructure';
 import Select from '../../components/Select';
 import StarsSelect from '../../components/StarsSelect';
+import DateInput from '../../components/DateInput';
+import { FormValues } from '../../@types/FormValues';
 
 const formFieldsComponents = {
   textfield: Input,
   checkboxfield: Select,
   urlfield: Input,
-  datefield: Input,
+  datefield: DateInput,
   ratingfield: StarsSelect,
 };
 
 const RegistrationFilling: React.FC = () => {
   const { setIsLoading } = useBlockLoadingContext();
 
+  const [formValues, setFormValues] = useState<FormValues[]>([]);
   const [formFields, setFormFields] = useState<FormStructureFormatted[]>([]);
 
   const { data, loading } = useQuery(LOAD_FORM);
@@ -30,12 +33,23 @@ const RegistrationFilling: React.FC = () => {
     if (data) {
       const { form_structure: formStructure_ } = data;
       const formattedStructureArray = formatStructure(formStructure_);
+
+      const formDefaultValues: FormValues[] = formattedStructureArray.map(
+        (fields) => ({
+          value: '',
+          componentId: fields.id,
+        }),
+      );
+      setFormValues(formDefaultValues);
       setFormFields(formattedStructureArray);
     }
   }, [loading, data]);
 
-  console.log(formFields);
+  const handleChange = (name: string, value: any) => {
+    console.log(name, value);
+  };
 
+  console.log(formValues);
   return (
     <Container>
       {formFields?.map((field) => {
@@ -50,6 +64,8 @@ const RegistrationFilling: React.FC = () => {
               options={field.options ?? []}
               isMultiSelect={field.multiple}
               helperText={field.helperLabel}
+              onChange={handleChange}
+              name={field.id}
             />
           </ContainerRegister>
         );
