@@ -17,6 +17,7 @@ import { formatStructure } from '../../helpers/formatStructure';
 import Select from '../../components/Select';
 import StarsSelect from '../../components/StarsSelect';
 import DateInput from '../../components/DateInput';
+import { errorsYup } from '../../helpers/errorsYup';
 
 const formFieldDefinitions = {
   textfield: {
@@ -46,6 +47,8 @@ const formFieldDefinitions = {
   },
 };
 
+yup.setLocale(errorsYup);
+
 const RegistrationFilling: React.FC = () => {
   const { setIsLoading } = useBlockLoadingContext();
 
@@ -53,7 +56,6 @@ const RegistrationFilling: React.FC = () => {
   const [formFields, setFormFields] = useState<FormStructureFormatted[]>([]);
 
   const { data, loading } = useQuery(LOAD_FORM);
-
   useEffect(() => {
     setIsLoading(loading);
     if (data) {
@@ -86,15 +88,22 @@ const RegistrationFilling: React.FC = () => {
     return yup.object().shape(shape);
   }, [formFields]);
 
+  const handleErrorFields = (field: string, error: string) => {
+    const oldFormFields = [...formFields];
+    const findFieldIndex = formFields.findIndex(
+      (field_) => field_.id === field,
+    );
+    oldFormFields[findFieldIndex].error = error;
+    setFormFields(oldFormFields);
+  };
+
   const handleOnSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     try {
       event.preventDefault();
-      const errors = await formSchema.validate(formValues);
-      console.log(errors, 'error');
-      const valid = await formSchema.isValid(formValues);
-      console.log(valid);
+      await formSchema.validate(formValues);
+      await formSchema.isValid(formValues);
     } catch (error) {
-      console.log(error);
+      handleErrorFields(error.path, error.errors);
     }
   };
 
@@ -103,6 +112,8 @@ const RegistrationFilling: React.FC = () => {
       <ContainerForm onSubmit={handleOnSubmit}>
         {formFields?.map((field) => {
           const RenderField = formFieldDefinitions[field.type].component;
+          const hasError = field.error.length > 0;
+          const textHelper = hasError ? field.error : field.helperLabel;
           return (
             <ContainerRegister>
               <RenderField
@@ -112,10 +123,11 @@ const RegistrationFilling: React.FC = () => {
                 label={field.label}
                 options={field.options ?? []}
                 isMultiSelect={field.multiple}
-                helperText={field.helperLabel}
+                helperText={textHelper}
                 onChange={handleChange}
                 name={field.id}
                 value={formValues[field.id]}
+                error={hasError}
               />
             </ContainerRegister>
           );

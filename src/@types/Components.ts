@@ -9,4 +9,5 @@ export interface IFieldProps {
   isMultiSelect?: boolean;
   onChange: (name: string, value: any) => void;
   name: string;
+  error: boolean;
 }

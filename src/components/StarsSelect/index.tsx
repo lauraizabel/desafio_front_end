@@ -10,7 +10,6 @@ const StarsSelect: React.FC<IFieldProps> = ({
   required,
   helperText,
   label,
-  value,
   onChange,
 }: IFieldProps) => {
   const handleChange = (values: number | null) => {

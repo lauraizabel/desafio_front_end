@@ -20,6 +20,7 @@ const Select: React.FC<IFieldProps> = ({
   helperText,
   name,
   onChange,
+  error,
 }: IFieldProps) => {
   const handleChange = (
     event: React.ChangeEvent<{
@@ -44,6 +45,7 @@ const Select: React.FC<IFieldProps> = ({
           autoWidth={true}
           value={value}
           name={name}
+          error={error}
         >
           {options?.map((val) => (
             <MenuItem value={val}>{val}</MenuItem>

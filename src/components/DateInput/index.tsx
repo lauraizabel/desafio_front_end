@@ -16,6 +16,7 @@ const DateInput: React.FC<IFieldProps> = ({
   label,
   onChange,
   name,
+  error,
 }: IFieldProps) => {
   const handleChange = (value: MaterialUiPickersDate) => {
     onChange(name, value);
@@ -41,6 +42,7 @@ const DateInput: React.FC<IFieldProps> = ({
           invalidLabel="Formato inválido."
           minDateMessage="Data inválida"
           maxDateMessage="Data inválida"
+          error={error}
         />
       </MuiPickersUtilsProvider>
     </Container>

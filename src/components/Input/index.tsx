@@ -9,10 +9,10 @@ const Input: React.FC<IFieldProps> = ({
   type,
   helperText,
   label,
-  value,
   placeholder,
   onChange,
   name,
+  error,
 }: IFieldProps) => {
   const onChangeValues = (
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
@@ -30,6 +30,7 @@ const Input: React.FC<IFieldProps> = ({
         variant="outlined"
         placeholder={placeholder}
         onChange={onChangeValues}
+        error={error}
       />
     </Container>
   );
