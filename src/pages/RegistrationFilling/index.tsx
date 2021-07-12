@@ -10,20 +10,19 @@ import { formatStructure } from '../../helpers/formatStructure';
 import Select from '../../components/Select';
 import StarsSelect from '../../components/StarsSelect';
 import DateInput from '../../components/DateInput';
-import { FormValues } from '../../@types/FormValues';
 
-const formFieldsComponents = {
-  textfield: Input,
-  checkboxfield: Select,
-  urlfield: Input,
-  datefield: DateInput,
-  ratingfield: StarsSelect,
+const formFieldDefinitions = {
+  textfield: { component: Input, defaultValue: '' },
+  checkboxfield: { component: Select, defaultValue: [] },
+  urlfield: { component: Input, defaultValue: '' },
+  datefield: { component: DateInput, defaultValue: new Date() },
+  ratingfield: { component: StarsSelect, defaultValue: '' },
 };
 
 const RegistrationFilling: React.FC = () => {
   const { setIsLoading } = useBlockLoadingContext();
 
-  const [formValues, setFormValues] = useState<FormValues[]>([]);
+  const [formValues, setFormValues] = useState<any>({});
   const [formFields, setFormFields] = useState<FormStructureFormatted[]>([]);
 
   const { data, loading } = useQuery(LOAD_FORM);
@@ -34,26 +33,28 @@ const RegistrationFilling: React.FC = () => {
       const { form_structure: formStructure_ } = data;
       const formattedStructureArray = formatStructure(formStructure_);
 
-      const formDefaultValues: FormValues[] = formattedStructureArray.map(
-        (fields) => ({
-          value: '',
-          componentId: fields.id,
-        }),
+      const formDefaultValues = Object.fromEntries(
+        formattedStructureArray.map((field) => [
+          field.id,
+          formFieldDefinitions[field.type].defaultValue,
+        ]),
       );
+
       setFormValues(formDefaultValues);
       setFormFields(formattedStructureArray);
     }
   }, [loading, data]);
 
   const handleChange = (name: string, value: any) => {
-    console.log(name, value);
+    setFormValues({ ...formValues, [name]: value });
   };
 
   console.log(formValues);
+
   return (
     <Container>
       {formFields?.map((field) => {
-        const RenderField = formFieldsComponents[field.type];
+        const RenderField = formFieldDefinitions[field.type].component;
         return (
           <ContainerRegister>
             <RenderField
@@ -66,6 +67,7 @@ const RegistrationFilling: React.FC = () => {
               helperText={field.helperLabel}
               onChange={handleChange}
               name={field.id}
+              value={formValues[field.id]}
             />
           </ContainerRegister>
         );

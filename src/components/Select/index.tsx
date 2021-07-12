@@ -27,7 +27,7 @@ const Select: React.FC<IFieldProps> = ({
       value: any;
     }>,
   ) => {
-    onChange(event.target.name ?? '', event.target.value);
+    onChange(name, event.target.value);
   };
 
   return (
@@ -42,7 +42,7 @@ const Select: React.FC<IFieldProps> = ({
           onChange={handleChange}
           multiple={isMultiSelect}
           autoWidth={true}
-          value={[]}
+          value={value}
           name={name}
         >
           {options?.map((val) => (
