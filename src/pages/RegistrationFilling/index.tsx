@@ -8,13 +8,14 @@ import { useBlockLoadingContext } from '../../contexts/BlockLoaderContext';
 import Input from '../../components/Input';
 import { formatStructure } from '../../helpers/formatStructure';
 import Select from '../../components/Select';
+import StarsSelect from '../../components/StarsSelect';
 
 const formFieldsComponents = {
   textfield: Input,
   checkboxfield: Select,
   urlfield: Input,
   datefield: Input,
-  ratingfield: Input,
+  ratingfield: StarsSelect,
 };
 
 const RegistrationFilling: React.FC = () => {
