@@ -1,6 +1,8 @@
+import { AnswerAndUser } from './answer';
+
 export interface IFieldProps {
   type?: string;
-  value?: string;
+  value: string;
   required: boolean;
   helperText?: string;
   label?: string;
@@ -10,4 +12,7 @@ export interface IFieldProps {
   onChange: (name: string, value: any) => void;
   name: string;
   error: boolean;
+  readonly?: boolean;
 }
+
+export interface ICardProps extends AnswerAndUser {}

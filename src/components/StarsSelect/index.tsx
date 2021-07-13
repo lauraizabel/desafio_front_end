@@ -1,6 +1,6 @@
 import React from 'react';
 import { Rating } from '@material-ui/lab';
-import { InputLabel, FormHelperText, FormControl } from '@material-ui/core';
+import { FormHelperText, FormControl } from '@material-ui/core';
 import { IFieldProps } from '../../@types/components';
 
 import { Container } from './styles';
@@ -11,6 +11,8 @@ const StarsSelect: React.FC<IFieldProps> = ({
   helperText,
   label,
   onChange,
+  value,
+  readonly = false,
 }: IFieldProps) => {
   const handleChange = (values: number | null) => {
     onChange(name, values?.toString());
@@ -23,6 +25,8 @@ const StarsSelect: React.FC<IFieldProps> = ({
           title={label}
           name={name}
           onChange={(event, val) => handleChange(val)}
+          value={Number(value)}
+          readOnly={readonly}
         />
         <FormHelperText>{helperText}</FormHelperText>
       </FormControl>

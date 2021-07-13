@@ -12,7 +12,7 @@ function App() {
     <ApolloProvider client={HttpClient}>
       <GlobalStyle />
       <BlockLoadingProvider>
-        <RegistrationFilling />
+        {/* <RegistrationFilling /> */}
         <ListFill />
       </BlockLoadingProvider>
     </ApolloProvider>
