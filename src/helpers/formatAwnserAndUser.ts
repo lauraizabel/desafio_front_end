@@ -9,7 +9,6 @@ const defaultAnswer = {
 };
 
 export const formatAwnserAndUser = (form: ResponseAnswer[]) => {
-  console.log(form);
   const formatted: AnswerAndUser[] = form.map((response) => {
     const formattedResponse: AnswerAndUser = {
       user: response.metaData,
