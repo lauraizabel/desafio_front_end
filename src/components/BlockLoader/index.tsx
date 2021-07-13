@@ -1,7 +1,7 @@
 import React from 'react';
 import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css';
-import { Container } from './styles';
+// import { Container } from './styles';
 
 interface IBlockLoader {
   blocking: boolean;
@@ -12,9 +12,9 @@ const BlockLoader: React.FC<IBlockLoader> = ({
   blocking,
   children,
 }: IBlockLoader) => (
-  <Container>
-    <BlockUi blocking={blocking}>{children}</BlockUi>
-  </Container>
+  <BlockUi blocking={blocking} className="blocking-class">
+    {children}
+  </BlockUi>
 );
 
 export default BlockLoader;

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { Button } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 
 import { useBlockLoadingContext } from '../../contexts/BlockLoaderContext';
 import { Container, ContainerCards, ContainerHeader } from './styles';
@@ -12,7 +13,7 @@ import Card from '../../components/Card';
 const ListFill: React.FC = () => {
   const [answers, setAnswers] = useState<AnswerAndUser[]>([]);
   const { setIsLoading } = useBlockLoadingContext();
-
+  const history = useHistory();
   const { data, loading } = useQuery(LOAD_ANSWER);
 
   useEffect(() => {
@@ -29,7 +30,11 @@ const ListFill: React.FC = () => {
     <Container>
       <ContainerHeader>
         <h3>Lista de Formulários Respondidos</h3>
-        <Button color="primary" variant="contained">
+        <Button
+          color="primary"
+          variant="contained"
+          onClick={() => history.push('/register-form')}
+        >
           Adicionar mais respostas
         </Button>
       </ContainerHeader>

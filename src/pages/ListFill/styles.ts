@@ -17,7 +17,8 @@ export const ContainerCards = styled.div`
 
 export const ContainerHeader = styled.header`
   width: 90%;
-  margin: 24px auto;
+  margin: 0 auto 24px;
+  padding-top: 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;

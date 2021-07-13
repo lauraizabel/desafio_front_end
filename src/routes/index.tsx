@@ -7,12 +7,8 @@ import RegistrationFilling from '../pages/RegistrationFilling';
 const Routes: React.FC = () => (
   <BrowserRouter>
     <Switch>
-      <Route path="/">
-        <ListFill />
-      </Route>
-      <Route path="/register-form">
-        <RegistrationFilling />
-      </Route>
+      <Route path="/" exact component={ListFill} />
+      <Route path="/register-form" exact component={RegistrationFilling} />
     </Switch>
   </BrowserRouter>
 );

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { Button } from '@material-ui/core';
 import * as yup from 'yup';
+import { useHistory } from 'react-router-dom';
 
 import { FormStructureFormatted } from '../../@types/formField';
 import {
@@ -56,6 +57,9 @@ const RegistrationFilling: React.FC = () => {
   const [formFields, setFormFields] = useState<FormStructureFormatted[]>([]);
 
   const { data, loading } = useQuery(LOAD_FORM);
+
+  const history = useHistory();
+
   useEffect(() => {
     setIsLoading(loading);
     if (data) {
@@ -102,6 +106,7 @@ const RegistrationFilling: React.FC = () => {
       event.preventDefault();
       await formSchema.validate(formValues);
       await formSchema.isValid(formValues);
+      history.goBack();
     } catch (error) {
       handleErrorFields(error.path, error.errors);
     }
@@ -135,6 +140,13 @@ const RegistrationFilling: React.FC = () => {
         <ContainerButton>
           <Button variant="contained" color="primary" type="submit">
             SALVAR RESPOSTAS
+          </Button>
+          <Button
+            variant="text"
+            color="secondary"
+            onClick={() => history.goBack()}
+          >
+            VOLTAR
           </Button>
         </ContainerButton>
       </ContainerForm>

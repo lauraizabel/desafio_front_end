@@ -7,13 +7,19 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     font-family: 'Roboto', sans-serif;
   }
-  body {
+  body, #root, .blocking-class {
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
     background-color: #443742;
   }
-  html, #root {
-    height: 100% !important;
+  
+  .block-ui {
+    height: 100%;
+  }
+  
+  .block-ui-container, .blocking-class {
+    width: 100%;
+    height: 100%;
   }
 `;
 
